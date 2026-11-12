@@ -26,7 +26,10 @@ EdgeToEdgeCutout/
 │   └── HookEntry.java            # Core LSPosed hook implementation
 ├── .gitignore
 ├── AndroidManifest.xml
+├── CONTRIBUTING.md               # Contribution & PR verification guidelines
 ├── LICENSE                       # MIT License
+├── README.md
+├── SECURITY.md                   # Security policy & scope isolation notes
 ├── bootstrap.ps1                 # Downloads & SHA-256-verifies pinned Android/Xposed tools
 ├── build.ps1                     # Compiles, dexes, aligns, signs, and verifies APK
 └── tools.lock.json               # Pinned tool URLs + SHA-256 checksums
