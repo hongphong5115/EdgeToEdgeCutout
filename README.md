@@ -1,3 +1,4 @@
+tui vai code bang gemini 3.8 flash
 # EdgeToEdgeCutout
 
 An open-source, minimal LSPosed/Xposed module (`dev.phong.edgetoedge`) that eliminates the black status bar band on Android 11+ (`minSdk 30`, `targetSdk 33`) devices by enforcing transparent edge-to-edge rendering and `shortEdges` display cutout mode for scoped applications.
