@@ -1,0 +1,19 @@
+# Build & downloaded toolchain outputs
+/build/
+/tools/
+/.local/
+
+# APK & signing artifacts
+*.apk
+*.apks
+*.jks
+*.keystore
+
+# IDE / OS junk
+.idea/
+.vscode/
+*.iml
+__pycache__/
+*.pyc
+Thumbs.db
+.DS_Store

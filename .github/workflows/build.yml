@@ -1,0 +1,53 @@
+name: Build EdgeToEdgeCutout APK
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify repository metadata and source
+        run: python scripts/verify.py
+
+      - name: Cache downloaded build tools
+        uses: actions/cache@v4
+        with:
+          path: tools
+          key: edge-to-edge-cutout-tools-${{ hashFiles('tools.lock.json') }}
+
+      - name: Bootstrap Android SDK and Xposed dependencies
+        shell: pwsh
+        run: ./bootstrap.ps1
+
+      - name: Build and sign APK
+        shell: pwsh
+        env:
+          EDGETOEDGE_SIGNING_PASSWORD: ${{ secrets.EDGETOEDGE_SIGNING_PASSWORD || 'edgetoedge-ci-signing-key' }}
+        run: ./build.ps1
+
+      - name: Verify built APK
+        run: python scripts/verify.py --apk build/EdgeToEdgeCutout.apk
+
+      - name: Upload built APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: EdgeToEdgeCutout-apk
+          path: build/EdgeToEdgeCutout.apk
